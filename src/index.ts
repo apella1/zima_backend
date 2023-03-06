@@ -1,6 +1,8 @@
 import express from "express";
 
 const app = express();
+const url =
+  "mongodb+srv://Reed:wFAUB3d1eliYbxJT@cluster0.cw2cigc.mongodb.net/?retryWrites=true&w=majority";
 
 const port = 3000;
 
