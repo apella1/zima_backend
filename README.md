@@ -39,6 +39,8 @@ This is the backend to [Zima application](https://github.com/apella1/zima).
 
 ## Technologies Used
 
+### Languages and Frameworks
+
 - TypeScript
 - Node.js
 - Express.js
@@ -46,4 +48,14 @@ This is the backend to [Zima application](https://github.com/apella1/zima).
 - Socket.io for chat functionality
 - Discourse or vanilla forums for the community forums
 - Node-cron for daily reminders
-- Incorporate a third party emergency hotline.
+
+### Dependencies Used
+
+- Validator.js - string validation and sanitization
+- Body-parser
+- Cookie-parser
+- Helmet
+- Cors
+- Dotenv
+- Mongoose
+- Compress

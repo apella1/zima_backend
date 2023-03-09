@@ -6,6 +6,7 @@ import compress from "compression";
 import helmet from "helmet";
 import path from "path";
 import cors from "cors";
+import config from "./config/config.js";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -18,22 +19,24 @@ app.use(helmet());
 app.use(compress());
 app.use(cookieParser());
 
-// setting up mongoose
-mongoose.Promise = global.Promise;
-const url =
-  "mongodb+srv://Reed:wFAUB3d1eliYbxJT@cluster0.cw2cigc.mongodb.net/?retryWrites=true&w=majority";
-
-mongoose.connect(url);
-mongoose.connection.on("error", () => {
-  throw new Error(`Unable to connect to database: ${url}`);
-});
-
-const port = process.env.PORT || 3000;
+// connecting to the database
+mongoose
+  .connect(config.mongo.url, { retryWrites: true, w: "majority" })
+  .then(() => {
+    console.info(`Running on ENV: ${process.env.NODE_ENV}`);
+    console.info(`Connected to MongoDB`);
+  })
+  .catch((error) => {
+    console.error(`Unable to connect.`);
+    console.error(error);
+  });
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Zima backend is live!");
 });
 
-app.listen(port, () => console.log(`App running on port ${port}`));
+app.listen(config.server.port, () =>
+  console.log(`App running on port ${config.server.port}`)
+);
 
 export default app;
