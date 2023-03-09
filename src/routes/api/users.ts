@@ -1,4 +1,5 @@
 import express, { Response, Request } from "express";
+import bcrypt from "bcrypt";
 import { User } from "../../models/user.model.js";
 import validateSignupInput from "../../validation/signup.js";
 
@@ -21,6 +22,17 @@ router.post("/signup", (req: Request, res: Response) => {
         password: req.body.password,
         password2: req.body.password2,
       });
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          newUser.password = hash;
+          newUser
+            .save()
+            .then((user) => res.json({ user }))
+            .catch((error) => console.log(error));
+        });
+      });
     }
   });
 });
+
+module.exports = router;

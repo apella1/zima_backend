@@ -59,3 +59,4 @@ This is the backend to [Zima application](https://github.com/apella1/zima).
 - Dotenv
 - Mongoose
 - Compress
+- Bcrypt - hashing plain text passwords
